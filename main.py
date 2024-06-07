@@ -1,10 +1,8 @@
-# main.py
-
-from Crews.trophy_guides_crew import TrophyGuidesCrew
+from Crews.trophy_guide.crew import TrophyGuideCrew
 
 def main():
     # Criar e inicializar a equipe
-    trophy_crew = TrophyGuidesCrew()
+    trophy_crew = TrophyGuideCrew()
     trophy_crew.execute()
 
 if __name__ == "__main__":
