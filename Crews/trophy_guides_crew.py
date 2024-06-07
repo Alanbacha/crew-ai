@@ -11,17 +11,20 @@ class TrophyGuidesCrew(Crew):
 	def __init__(self):
 		game_name = input("Digite o nome do jogo: ")
 
+		# Agents
+		guideSearchAgent = GuideSearchAgent()
+		optimizationAgent = OptimizationAgent()
+
+		# Tasks
+		searchGuidesTask = SearchGuidesTask(guideSearchAgent, game_name)
+		optimizeGuideTask = OptimizeGuideTask(optimizationAgent)
+
 		super().__init__(
-			agents=[
-				GuideSearchAgent(),
-				OptimizationAgent()
-			],
-			tasks=[
-				SearchGuidesTask(game_name),
-				OptimizeGuideTask(game_name)
-			],
-			language="Portuguese",
-			max_rpm=CREW_MAX_RPM
+			agents = [guideSearchAgent, optimizationAgent],
+			tasks = [searchGuidesTask, optimizeGuideTask],
+			language = "Portuguese",
+			max_rpm = CREW_MAX_RPM,
+			verbose=True
 		)
 
 	def execute(self):

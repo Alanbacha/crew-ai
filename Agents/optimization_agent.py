@@ -6,9 +6,10 @@ from crewai import Agent
 class OptimizationAgent(Agent):
     def __init__(self):
         super().__init__(
-            role='Agente de Otimização de Guias',
-            goal='Otimizar os guias de troféus e criar um novo guia especializado.',
-            backstory="Especialista em otimizar guias para alcançar múltiplos troféus simultaneamente e fazer um Guia especializado.",
+            role='Agente de Otimização de Obtenção de Troféus',
+            goal='Otimizar os troféus e criar uma lista um guia com o passo a passo de como conquistar os troféus de forma otimizada.',
+            backstory="Especialista em otimizar tempo para alcançar múltiplos troféus simultaneamente e fazer um guia especializado.",
             max_iter=AGENT_MAX_ITER,  # Opcional
-            max_rpm=AGENT_MAX_RPM
+            max_rpm=AGENT_MAX_RPM,
+            verbose=True
         )
