@@ -1,29 +1,35 @@
 from config import CREW_MAX_RPM
 from crewai import Crew
-from Crews.trophy_guide.agents import TrophyGuideSearchAgent, TrophyGuideOptimizationAgent
-from Crews.trophy_guide.tasks import TrophyGuideSearchTask, TrophyGuideOptimizationTask
+from Crews.trophy_guide.agents import Agents
+from Crews.trophy_guide.tasks import Tasks
 
-class TrophyGuideCrew(Crew):
+class TrophyGuideCrew():
+	crew:Crew
+	game_name:str
+
 	def __init__(self):
-		game_name = input("Digite o nome do jogo: ")
+		self.game_name = input("Digite o nome do jogo: ")
 
 		# Agents
-		searchAgent = TrophyGuideSearchAgent()
-		optimizationAgent = TrophyGuideOptimizationAgent()
+		searchAgent = Agents.Search
+		optimizationAgent = Agents.Optimization
 
 		# Tasks
-		searchTask = TrophyGuideSearchTask(searchAgent, game_name)
-		optimizationTask = TrophyGuideOptimizationTask(optimizationAgent, game_name)
+		searchTask = Tasks.Search
+		optimizationTask = Tasks.Optimization
 
-		super().__init__(
+		# Tasks e Agents
+		searchTask.agent= searchAgent
+		optimizationTask.agent= optimizationAgent
+
+		self.crew = Crew(
 			agents = [searchAgent, optimizationAgent],
 			tasks = [searchTask, optimizationTask],
-			language = "Portuguese",
 			max_rpm = CREW_MAX_RPM,
 			verbose = True
 		)
 
 	def execute(self):
-		result = self.kickoff(inputs={})
-		print(result)
+		result = self.crew.kickoff(inputs={"game_name":self.game_name})
+
 		return result

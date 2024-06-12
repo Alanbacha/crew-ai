@@ -46,5 +46,8 @@ venv.bak/
 # Arquivos do PyCharm
 .idea/
 
+# Arquivos de db
+db/
+
 # Arquivos do VSCode
 .vscode/
