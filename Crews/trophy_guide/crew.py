@@ -3,6 +3,7 @@ from crewai import Crew
 from Crews.trophy_guide.agents import Agents
 from Crews.trophy_guide.tasks import Tasks
 
+
 class TrophyGuideCrew():
 	crew:Crew
 	game_name:str
@@ -10,16 +11,14 @@ class TrophyGuideCrew():
 	def __init__(self):
 		self.game_name = input("Digite o nome do jogo: ")
 
-		# Agents
+		# Agente de busca
 		searchAgent = Agents.Search
-		optimizationAgent = Agents.Optimization
-
-		# Tasks
 		searchTask = Tasks.Search
-		optimizationTask = Tasks.Optimization
-
-		# Tasks e Agents
 		searchTask.agent= searchAgent
+
+		# Agente de otimização
+		optimizationAgent = Agents.Optimization
+		optimizationTask = Tasks.Optimization
 		optimizationTask.agent= optimizationAgent
 
 		self.crew = Crew(
@@ -28,6 +27,16 @@ class TrophyGuideCrew():
 			max_rpm = CREW_MAX_RPM,
 			verbose = True
 		)
+
+		# Tasks.Search.agent = Agents.Search
+		# Tasks.Optimization.agent = Agents.Optimization
+
+		# self.crew = Crew(
+		# 	agents = [Agents.Search, Agents.Optimization],
+		# 	tasks = [Tasks.Search, Tasks.Optimization],
+		# 	max_rpm = CREW_MAX_RPM,
+		# 	verbose = True
+		# )
 
 	def execute(self):
 		result = self.crew.kickoff(inputs={"game_name":self.game_name})

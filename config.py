@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+SERPER_API_KEY = os.getenv("SERPER_API_KEY")
 
 # Configurações de limite de requisição
 AGENT_MAX_RPM = 3
